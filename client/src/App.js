@@ -9,7 +9,7 @@ const [profileData, setProfileData] = useState(null)
   function getData() {
     axios({
       method: "GET",
-      url:"http:localhost:5000/profile",
+      url:"/profile",
     })
     .then((response) => {
       const res =response.data
