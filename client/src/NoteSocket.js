@@ -1,10 +1,9 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import useWebSocket, { ReadyState } from 'react-use-websocket';
 
-export const LetterSocket = () => {
+export const NoteSocket = () => {
   const [socketUrl, setSocketUrl] = useState('ws://localhost:5000/note');
   const [messageHistory, setMessageHistory] = useState([]);
-
   const { sendMessage, lastMessage, readyState } = useWebSocket(socketUrl);
 
   useEffect(() => {
@@ -14,7 +13,7 @@ export const LetterSocket = () => {
   }, [lastMessage, setMessageHistory]);
 
   const handleClickChangeSocketUrl = useCallback(
-    () => setSocketUrl('ws://localhost:5000/echo'),
+    () => setSocketUrl('ws://localhost:5000/note'),
     []
   );
 
