@@ -1,6 +1,14 @@
 from flask import Flask
-
+from flask_sock import Sock
 api = Flask(__name__)
+sock = Sock(api)
+
+
+@sock.route('/echo')
+def echo(ws):
+    while True:
+        data = ws.receive()
+        ws.send(data)
 
 @api.route('/profile')
 def my_profile():
