@@ -1,9 +1,16 @@
 from flask import Flask
 from flask_sock import Sock
+from time import sleep
 
 api = Flask(__name__)
 sock = Sock(api)
 
+
+@sock.route('/note')
+def note(ws):
+    for i in range(10):
+        ws.send(i)
+        sleep(1)
 
 @sock.route('/echo')
 def echo(ws):
