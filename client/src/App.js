@@ -1,5 +1,4 @@
 import './App.css';
-import { WebSocketDemo } from './WebSocket.js'
 import { NoteSocket } from './NoteSocket.js'
 
 function App() {
