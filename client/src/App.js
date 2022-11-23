@@ -5,7 +5,6 @@ import { NoteSocket } from './NoteSocket.js'
 function App() {
   return (
     <div className="App">
-       <WebSocketDemo/>
         <NoteSocket/>
     </div>
   );
