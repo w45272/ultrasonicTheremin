@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import useWebSocket, { ReadyState } from 'react-use-websocket';
-
+import { Input } from 'reactstrap';
 export const NoteSocket = () => {
   const [socketUrl, setSocketUrl] = useState('ws://localhost:5000/note');
   const [messageHistory, setMessageHistory] = useState([]);
@@ -19,7 +19,7 @@ export const NoteSocket = () => {
   const handleClickChangeSocketUrl = () => {
     
   };
-  const handleClickSendMessage = useCallback(() => sendMessage('Hello'), []);
+  // const handleClickSendMessage = useCallback(() => sendMessage('Hello'), []);
 
   const connectionStatus = {
     [ReadyState.CONNECTING]: 'Connecting',
@@ -34,6 +34,12 @@ export const NoteSocket = () => {
       <button onClick={handleClickChangeSocketUrl}>
         Click Me to change Socket Url
       </button>
+      <Input
+        value = {socketUrl}
+        onChange={(e) => {setSocketUrl(e.target.value)}}
+      >
+      </Input>
+      <span> The Socket URL is currently {socketUrl}</span>
       <span>The WebSocket is currently {connectionStatus}</span>
       {lastMessage ? <span>Last message: {lastMessage.data}</span> : null}
       <ul>
