@@ -12,11 +12,13 @@ export const NoteSocket = () => {
     }
   }, [lastMessage, setMessageHistory]);
 
-  const handleClickChangeSocketUrl = useCallback(
-    () => setSocketUrl('ws://localhost:5000/note'),
-    []
-  );
-
+  // const handleClickChangeSocketUrl = useCallback(
+  //   () => setSocketUrl('ws://localhost:5000/note'),
+  //   []
+  // );
+  const handleClickChangeSocketUrl = () => {
+    
+  };
   const handleClickSendMessage = useCallback(() => sendMessage('Hello'), []);
 
   const connectionStatus = {
@@ -31,12 +33,6 @@ export const NoteSocket = () => {
     <div>
       <button onClick={handleClickChangeSocketUrl}>
         Click Me to change Socket Url
-      </button>
-      <button
-        onClick={handleClickSendMessage}
-        disabled={readyState !== ReadyState.OPEN}
-      >
-        Click Me to send 'Hello'
       </button>
       <span>The WebSocket is currently {connectionStatus}</span>
       {lastMessage ? <span>Last message: {lastMessage.data}</span> : null}
