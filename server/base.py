@@ -12,17 +12,17 @@ def note(ws):
         ws.send(i)
         sleep(1)
 
-@sock.route('/echo')
-def echo(ws):
-    while True:
-        data = ws.receive()
-        ws.send(data)
-
-@api.route('/profile')
-def my_profile():
-    response_body = {
-        "name": "Nagato",
-        "about" :"Hello! I'm a full stack developer that loves python and javascript"
-    }
-
-    return response_body
+# @sock.route('/echo')
+# def echo(ws):
+#     while True:
+#         data = ws.receive()
+#         ws.send(data)
+#
+# @api.route('/profile')
+# def my_profile():
+#     response_body = {
+#         "name": "Nagato",
+#         "about" :"Hello! I'm a full stack developer that loves python and javascript"
+#     }
+#
+#     return response_body
