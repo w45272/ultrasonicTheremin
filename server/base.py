@@ -1,16 +1,29 @@
 from flask import Flask
 from flask_sock import Sock
 from time import sleep
-
+import ../rpi/theremin.py
 api = Flask(__name__)
 sock = Sock(api)
 
 
 @sock.route('/note')
 def note(ws):
-    for i in range(10):
-        ws.send(i)
-        sleep(1)
+    buzzer = GPIO.PWM(triggerPIN, 440) # Set frequency to 1 Khz
+    buzzer.start(10)
+
+    try:
+        while True:
+            dist = distance()
+            # print(dist)
+            ws.send(dist)
+            buzzer.ChangeFrequency(dist*10)
+
+    except KeyboardInterrupt:
+       GPIO.cleanup()
+    # for i in range(10):
+    #     ws.send(i)
+    #     sleep(1)
+
 
 # @sock.route('/echo')
 # def echo(ws):
