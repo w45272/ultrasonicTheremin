@@ -2,10 +2,34 @@ from flask import Flask
 from flask_sock import Sock
 import time
 import RPi.GPIO as GPIO
-import theremin
 
 api = Flask(__name__)
 sock = Sock(api)
+GPIO.setmode(GPIO.BCM)
+GPIO_TRIGGER = 23 
+GPIO_ECHO = 24
+triggerPIN = 18
+GPIO.setup(GPIO_TRIGGER, GPIO.OUT)
+GPIO.setup(GPIO_ECHO, GPIO.IN)
+GPIO.setup(triggerPIN, GPIO.OUT)
+
+def distance():
+    GPIO.output(GPIO_TRIGGER, True)
+    time.sleep(0.1)
+    GPIO.output(GPIO_TRIGGER, False)
+    StartTime = time.time()
+    StopTime = time.time()
+
+    while GPIO.input(GPIO_ECHO) == 0:
+        StartTime = time.time()
+
+    while GPIO.input(GPIO_ECHO) == 1:
+        StopTime = time.time()
+
+    TimeElapsed = StopTime - StartTime
+    distance = (TimeElapsed * 34300) / 2
+    # print(distance)
+    return distance
 
 @sock.route('/note')
 def note(ws):
@@ -14,29 +38,10 @@ def note(ws):
 
     try:
         while True:
-            dist = theremin.distance()
-            # print(dist)
+            dist = distance()
             ws.send(dist)
             buzzer.ChangeFrequency(dist*10)
 
     except KeyboardInterrupt:
        GPIO.cleanup()
-    # for i in range(10):
-    #     ws.send(i)
-    #     sleep(1)
 
-
-# @sock.route('/echo')
-# def echo(ws):
-#     while True:
-#         data = ws.receive()
-#         ws.send(data)
-#
-# @api.route('/profile')
-# def my_profile():
-#     response_body = {
-#         "name": "Nagato",
-#         "about" :"Hello! I'm a full stack developer that loves python and javascript"
-#     }
-#
-#     return response_body
