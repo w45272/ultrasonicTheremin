@@ -1,10 +1,11 @@
 from flask import Flask
 from flask_sock import Sock
-from time import sleep
-import theremin.py
+import time
+import RPi.GPIO as GPIO
+import theremin
+
 api = Flask(__name__)
 sock = Sock(api)
-
 
 @sock.route('/note')
 def note(ws):
@@ -13,7 +14,7 @@ def note(ws):
 
     try:
         while True:
-            dist = distance()
+            dist = theremin.distance()
             # print(dist)
             ws.send(dist)
             buzzer.ChangeFrequency(dist*10)
