@@ -1,7 +1,7 @@
 from flask import Flask
 from flask_sock import Sock
 from time import sleep
-import ../rpi/theremin.py
+import theremin.py
 api = Flask(__name__)
 sock = Sock(api)
 
