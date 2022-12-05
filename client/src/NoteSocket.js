@@ -38,15 +38,15 @@ export const NoteSocket = () => {
         value = {socketUrl}
         onChange={(e) => {setSocketUrl(e.target.value)}}
       >
-      </Input>
-      <span> The Socket URL is currently {socketUrl}</span>
-      <span>The WebSocket is currently {connectionStatus}</span>
+      </Input><br>
+      <span> The Socket URL is currently {socketUrl}</span><br>
+      <span>The WebSocket is currently {connectionStatus}</span><br>
       {lastMessage ? <span>Last message: {lastMessage.data}</span> : null}
-      <ul>
-        {messageHistory.map((message, idx) => (
-          <span key={idx}>{message ? message.data : null}</span>
-        ))}
-      </ul>
+      {/* <ul> */}
+      {/*   {messageHistory.map((message, idx) => ( */}
+      {/*     <span key={idx}>{message ? message.data : null}</span> */}
+      {/*   ))} */}
+      {/* </ul> */}
     </div>
   );
 };
