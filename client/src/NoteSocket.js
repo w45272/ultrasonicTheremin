@@ -38,9 +38,9 @@ export const NoteSocket = () => {
         value = {socketUrl}
         onChange={(e) => {setSocketUrl(e.target.value)}}
       >
-      </Input><br>
-      <span> The Socket URL is currently {socketUrl}</span><br>
-      <span>The WebSocket is currently {connectionStatus}</span><br>
+      </Input><br></br>
+      <span> The Socket URL is currently {socketUrl}</span><br></br>
+      <span>The WebSocket is currently {connectionStatus}</span><br></br>
       {lastMessage ? <span>Last message: {lastMessage.data}</span> : null}
       {/* <ul> */}
       {/*   {messageHistory.map((message, idx) => ( */}
